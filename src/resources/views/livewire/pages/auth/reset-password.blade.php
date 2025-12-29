@@ -25,7 +25,7 @@ new #[Layout('layouts.guest')] class extends Component
     {
         $this->token = $token;
 
-        $this->email = request()->string('email');
+        $this->email = request()->input('email', '');
     }
 
     /**
