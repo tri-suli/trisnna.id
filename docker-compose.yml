@@ -1,0 +1,60 @@
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: trisnna-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - trisnna-network
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: trisnna-php
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - trisnna-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: trisnna-mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_USER: ${DB_USERNAME:-laravel}
+    volumes:
+      - trisnna-dbdata:/var/lib/mysql
+    networks:
+      - trisnna-network
+
+  node:
+    image: node:alpine
+    container_name: trisnna-node
+    tty: true
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - trisnna-network
+
+networks:
+  trisnna-network:
+    driver: bridge
+
+volumes:
+  trisnna-dbdata:
+    driver: local
