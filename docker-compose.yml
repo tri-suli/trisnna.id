@@ -40,9 +40,10 @@ services:
       - trisnna-network
 
   node:
-    image: node:alpine
+    image: node:bookworm-slim
     container_name: trisnna-node
     tty: true
+    command: npm run dev
     ports:
       - "5173:5173"
     volumes:
