@@ -43,6 +43,8 @@ services:
     image: node:alpine
     container_name: trisnna-node
     tty: true
+    ports:
+      - "5173:5173"
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html

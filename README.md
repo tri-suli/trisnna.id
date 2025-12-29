@@ -7,7 +7,10 @@ To get started with the development environment:
 3. Follow further instructions in the `docs` folder.
 
 ## Frontend Development
-The project uses Docker for Node/NPM. To manage frontend assets:
-- **Install dependencies**: `docker exec trisnna-node npm install`
-- **Build assets**: `docker exec trisnna-node npm run build`
-- **Development (Vite)**: `docker exec trisnna-node npm run dev`
+To run the Vite development server:
+1. Start the containers: `docker-compose up -d`
+2. Run Vite: `docker exec trisnna-node npm run dev`
+The development server will be available at `http://localhost:5173`.
+
+To build assets for production:
+`docker exec trisnna-node npm run build`
