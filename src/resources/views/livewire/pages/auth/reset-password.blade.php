@@ -70,24 +70,29 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
-    <form wire:submit="resetPassword">
+    <div class="mb-8 text-center">
+        <h2 class="text-3xl font-extrabold text-brand-dark">Reset Password</h2>
+        <p class="text-brand-rust mt-2">Create your new secure password</p>
+    </div>
+
+    <form wire:submit="resetPassword" class="space-y-6">
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('Email')" class="text-brand-dark font-medium" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <div>
+            <x-input-label for="password" :value="__('Password')" class="text-brand-dark font-medium" />
             <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+        <div>
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="text-brand-dark font-medium" />
 
             <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
                           type="password"
@@ -96,8 +101,8 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
+        <div>
+            <x-primary-button class="w-full justify-center">
                 {{ __('Reset Password') }}
             </x-primary-button>
         </div>
